@@ -74,12 +74,28 @@
           <span class="lang-code text-xs font-semibold text-warm-600">ΕΛ</span>
         </button>
         <a href="dashboard.html" class="hidden sm:inline-flex text-sm font-medium text-warm-600 nav-link"><span class="t" data-en="Log In">Σύνδεση</span></a>
-        <a href="mailto:business@beeparent.gr" class="btn-accent inline-flex items-center gap-2 h-9 px-4 rounded-md text-sm font-semibold">
+        <a href="mailto:business@beeparent.gr" class="btn-accent hidden md:inline-flex items-center gap-2 h-9 px-4 rounded-md text-sm font-semibold">
           <span class="t" data-en="Get in Touch">Επικοινωνήστε</span>
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
+        <button id="mob-menu-btn" onclick="toggleMobMenu()" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-md border border-warm-200 hover:bg-warm-100 transition-colors mr-1" aria-label="Menu">
+          <span class="block w-5 h-0.5 bg-warm-700 rounded transition-all"></span>
+          <span class="block w-5 h-0.5 bg-warm-700 rounded transition-all"></span>
+          <span class="block w-5 h-0.5 bg-warm-700 rounded transition-all"></span>
+        </button>
       </div>
     </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-warm-200 bg-warm-50/98 backdrop-blur-md px-6 py-3">
+    <a href="index.html" class="nav-link block py-3 text-sm font-medium text-warm-700 border-b border-warm-100">Αρχική</a>
+    <a href="marketplace.html" class="nav-link block py-3 text-sm font-medium text-warm-700 border-b border-warm-100">Βρες Κυψέλη</a>
+    <a href="index.html#for-beekeepers" class="nav-link block py-3 text-sm font-medium text-warm-700 border-b border-warm-100">Για Μελισσοκόμους</a>
+    <a href="companies.html" class="nav-link block py-3 text-sm font-medium text-warm-700 border-b border-warm-100">Για Εταιρείες</a>
+    <a href="about.html" class="nav-link block py-3 text-sm font-medium text-warm-700">Σχετικά</a>
+    <div class="pt-3 border-t border-warm-200 mt-1">
+      <a href="dashboard.html" class="nav-link block py-2 text-sm font-medium text-warm-600">Σύνδεση</a>
+      <a href="marketplace.html" class="btn-accent mt-2 flex items-center justify-center gap-2 h-10 rounded-md text-sm font-semibold w-full">Υιοθέτησε Κυψέλη &rarr;</a>
+    </div>
+  </div>
   </nav>
 
   <!-- Hero -->
@@ -695,6 +711,13 @@
       currentLang = localStorage.getItem('hh-lang') || 'el';
       applyLang();
     });
+  </script>
+
+  <script>
+  function toggleMobMenu(){
+    var m=document.getElementById('mob-menu');
+    m.classList.toggle('hidden');
+  }
   </script>
 </body>
 </html>
