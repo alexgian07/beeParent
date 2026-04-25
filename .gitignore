@@ -1,2 +1,5 @@
 # Logo and internal documents — kept local, not tracked
 Docs/
+
+# Claude Code session data
+.claude/
