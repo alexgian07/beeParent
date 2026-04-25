@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Βρες Κυψέλη — Bee Parent</title>
+  <link rel="icon" type="image/png" href="Docs/LOGO_transparent.PNG">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            honey: { 50:'#fef9ec',100:'#fdf0c9',200:'#fbdf93',300:'#f8c74a',400:'#f4b824',500:'#d4890a',600:'#b36c06',700:'#8f5205',800:'#6a3c04',900:'#4a2903',950:'#2d1802' },
+            coral: { 50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c' },
+            sage:  { 50:'#f0fdf6',100:'#dcfce9',200:'#bbf7d2',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d' },
+            warm:  { 50:'#fafaf6',100:'#f5f5ef',200:'#e8e8e0',300:'#d5d5cb',400:'#aeaea4',500:'#838379',600:'#5e5e55',700:'#444440',800:'#2f2f2c',900:'#1e1e1b',950:'#131310' }
+          },
+          fontFamily: { sans:['Plus Jakarta Sans','system-ui','sans-serif'], mono:['JetBrains Mono','ui-monospace','monospace'] },
+          borderRadius: { sm:'6px',DEFAULT:'10px',md:'10px',lg:'14px',xl:'20px','2xl':'28px' },
+          boxShadow: {
+            ws:'0 1px 4px 0 rgb(74 41 3/.08),0 1px 2px -1px rgb(74 41 3/.05)',
+            wm:'0 4px 12px -2px rgb(74 41 3/.10),0 2px 4px -2px rgb(74 41 3/.06)',
+            wl:'0 10px 24px -4px rgb(74 41 3/.12),0 4px 8px -4px rgb(74 41 3/.08)',
+            wx:'0 20px 40px -8px rgb(74 41 3/.15),0 8px 16px -8px rgb(74 41 3/.08)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color:#fafaf6; color:#1e1e1b; font-family:'Plus Jakarta Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    .btn-accent { background:#16a34a; color:#fff; transition:all 150ms ease-in-out; }
+    .btn-accent:hover { background:#15803d; }
+    .btn-accent:active { transform:scale(.97); }
+    .nav-link { transition:color 150ms ease-in-out; }
+    .nav-link:hover { color:#d4890a; }
+    .hive-card { transition:transform 200ms ease-out,box-shadow 200ms ease-out; }
+    .hive-card:hover { transform:translateY(-3px); box-shadow:0 20px 40px -8px rgb(74 41 3/.15),0 8px 16px -8px rgb(74 41 3/.08); }
+    .filter-chip { cursor:pointer; transition:all 150ms ease-in-out; }
+    .filter-chip.active { background:#fdf0c9; color:#2d1802; border-color:#f4b824; }
+    .filter-chip:hover { border-color:#aeaea4; }
+    :focus-visible { outline:2px solid #16a34a; outline-offset:2px; border-radius:6px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    a { text-decoration:none; }
+    input[type=range] { accent-color:#d4890a; }
+    input[type=checkbox] { accent-color:#16a34a; }
+    @keyframes bee-wing-beat{from{transform:scaleY(1)}to{transform:scaleY(.12)}}
+    .photo-wrap{position:relative;overflow:hidden;}
+    .photo-wrap .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+    .photo-wrap img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;}
+    #hive-grid.list-view{display:flex;flex-direction:column;gap:12px;}
+    #hive-grid.list-view .hive-card{display:flex;flex-direction:row;}
+    #hive-grid.list-view .hive-card .photo-wrap{width:160px;min-width:160px;height:auto!important;border-radius:0;}
+    #hive-grid.list-view .hive-card .relative{width:160px;min-width:160px;flex-shrink:0;}
+    #hive-grid.list-view .hive-card .p-4{flex:1;display:flex;flex-direction:column;justify-content:center;}
+    #hive-grid.list-view .hive-card .fallback{font-size:2.5rem!important;}
+  </style>
+</head>
+<body class="min-h-screen bg-warm-50">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-30 bg-warm-50/95 backdrop-blur-md" style="overflow:visible">
+    <div class="w-full px-4 h-24 flex items-center justify-between" style="overflow:visible">
+      <a href="index.html" class="flex items-center gap-2" style="align-self:flex-start;padding-top:3px">
+        <img src="Docs/LOGO_transparent.PNG" alt="bee PARENT" style="height:92px;width:auto;">
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="Home">Αρχική</span></a>
+        <a href="marketplace.html" class="text-sm font-semibold text-honey-600"><span class="t" data-en="Find a Hive">Βρες Κυψέλη</span></a>
+        <a href="index.html#for-beekeepers" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="For Beekeepers">Για Μελισσοκόμους</span></a>
+        <a href="companies.html" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="For Companies">Για Εταιρείες</span></a>
+        <a href="about.html" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="About">Σχετικά</span></a>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="lang-btn" onclick="toggleLang()"
+          class="flex items-center gap-1 h-8 px-2.5 rounded-md border border-warm-200 hover:bg-warm-100 transition-colors">
+          <span class="lang-flag text-sm leading-none">🇬🇷</span>
+          <span class="lang-code text-xs font-semibold text-warm-600">ΕΛ</span>
+        </button>
+        <a href="dashboard.html" class="hidden sm:inline-flex text-sm font-medium text-warm-600 nav-link"><span class="t" data-en="Log In">Σύνδεση</span></a>
+        <a href="marketplace.html" class="btn-accent inline-flex items-center gap-2 h-9 px-4 rounded-md text-sm font-semibold">
+          <span class="t" data-en="Adopt a Hive">Υιοθέτησε Κυψέλη</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="bg-warm-50 border-b border-warm-200">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="text-xs text-warm-400 mb-2">
+        <a href="index.html" class="nav-link hover:text-warm-600"><span class="t" data-en="Home">Αρχική</span></a>
+        <span class="mx-1.5">›</span>
+        <span class="t" data-en="Browse Hives">Αναζήτηση Κυψελών</span>
+      </div>
+      <div class="flex items-end justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-warm-950 tracking-tight"><span class="t" data-en="Find Your Hive">Βρες την Κυψέλη σου</span></h1>
+          <p class="text-warm-500 mt-1.5"><span class="t" data-en="Beehives available in Central Greece">Κυψέλες στη Στερεά Ελλάδα · Επιλεγμένοι μελισσοκόμοι</span></p>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <span class="text-sm text-warm-500"><span class="t" data-en="Sort by">Ταξινόμηση</span></span>
+          <select id="sort-select" onchange="applySort()" class="h-9 px-3 pr-8 border border-warm-200 rounded-md text-sm text-warm-700 bg-white shadow-ws focus:outline-none focus:border-honey-400 appearance-none" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22 fill=%22%23aeaea4%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22/></svg>');background-repeat:no-repeat;background-position:right 8px center;background-size:16px;">
+            <option value="popular">Πιο δημοφιλείς</option>
+            <option value="spots-asc">Λιγότερες θέσεις πρώτα</option>
+            <option value="spots-desc">Περισσότερες θέσεις πρώτα</option>
+            <option>Μεγαλύτερη παραγωγή</option>
+            <option>Νεότερες</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      <div id="active-chips" class="flex flex-wrap gap-2 mt-5 items-center">
+        <span id="chip-avail" class="inline-flex items-center gap-1.5 bg-honey-100 text-honey-700 border border-honey-300 text-xs font-medium px-2.5 py-1 rounded-full">
+          <span class="t" data-en="Available now">Διαθέσιμα τώρα</span>
+          <button onclick="removeAvailChip()" class="hover:text-honey-900 transition-colors" aria-label="Remove filter">
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </span>
+        <div id="region-chips" class="flex flex-wrap gap-2"></div>
+        <div id="honey-chips" class="flex flex-wrap gap-2"></div>
+        <button id="clear-all-btn" onclick="clearAllFilters()" class="hidden text-xs text-sage-600 font-medium hover:text-sage-700 nav-link"><span class="t" data-en="Clear all">Καθαρισμός</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout: Sidebar + Grid -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex gap-8">
+
+      <!-- Filter Sidebar -->
+      <aside class="hidden lg:block w-60 flex-shrink-0">
+        <div class="sticky top-24 space-y-6">
+
+          <!-- Region -->
+          <div>
+            <h3 class="text-xs font-semibold text-warm-500 uppercase tracking-wider mb-3 flex items-center justify-between"><span class="t" data-en="Greek Region">Περιοχή Ελλάδας</span><span id="badge-region" class="hidden text-honey-600 font-bold text-xs"></span></h3>
+            <div class="space-y-2.5">
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="evvoia" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Euboea">Εύβοια</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="fokida" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Phocis (Parnassus)">Φωκίδα (Παρνασσός)</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="voiotia" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Boeotia">Βοιωτία</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="fthiotida" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Fthiotis">Φθιώτιδα</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="evrytania" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Evrytania">Ευρυτανία</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="attiki" class="filter-region w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Attica (Hymettus)">Αττική (Υμηττός)</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="border-t border-warm-200"></div>
+
+          <!-- Honey Type -->
+          <div>
+            <h3 class="text-xs font-semibold text-warm-500 uppercase tracking-wider mb-3 flex items-center justify-between"><span class="t" data-en="Honey Type">Τύπος Μελιού</span><span id="badge-honey" class="hidden text-honey-600 font-bold text-xs"></span></h3>
+            <div class="space-y-2.5">
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="thyme" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Thyme">Θυμάρι</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="wildflower" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Wildflower">Αγριολούλουδα</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="fir" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Fir (forest)">Ελατόμελο</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="pine" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Pine">Πεύκο</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="blossom" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Blossom">Ανθόμελο</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="oregano" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Oregano">Ρίγανη</span></span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" value="citrus" class="filter-honey w-4 h-4 rounded-sm">
+                <span class="text-sm text-warm-700 group-hover:text-warm-900 transition-colors"><span class="t" data-en="Citrus (south Greece)">Εσπεριδοειδή</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="border-t border-warm-200"></div>
+
+          <!-- Price Range -->
+          <div>
+            <h3 class="text-xs font-semibold text-warm-500 uppercase tracking-wider mb-3"><span class="t" data-en="Price Range / Year">Τιμή / Έτος</span></h3>
+            <div class="space-y-2">
+              <div class="space-y-2">
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="radio" name="pkg" value="all" checked class="w-4 h-4" onchange="applyFilters()">
+                  <span class="text-sm text-warm-700 group-hover:text-warm-900"><span class="t" data-en="All tiers">Όλες οι κατηγορίες</span></span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="radio" name="pkg" value="basic" class="w-4 h-4" onchange="applyFilters()">
+                  <span class="text-sm text-warm-700 group-hover:text-warm-900">BASIC · €90–€120</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="radio" name="pkg" value="premium" class="w-4 h-4" onchange="applyFilters()">
+                  <span class="text-sm text-warm-700 group-hover:text-warm-900">PREMIUM · €180–€220</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="radio" name="pkg" value="gold" class="w-4 h-4" onchange="applyFilters()">
+                  <span class="text-sm text-warm-700 group-hover:text-warm-900">GOLD · €320–€400</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-warm-200"></div>
+
+          <!-- Availability -->
+          <div>
+            <h3 class="text-xs font-semibold text-warm-500 uppercase tracking-wider mb-3"><span class="t" data-en="Availability">Διαθεσιμότητα</span></h3>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="text-sm text-warm-700"><span class="t" data-en="Available now only">Μόνο διαθέσιμες</span></span>
+              <div class="relative">
+                <input type="checkbox" checked id="filter-avail" class="sr-only peer">
+                <div class="w-10 h-6 rounded-full bg-warm-200 peer-checked:bg-sage-500 transition-colors cursor-pointer peer-focus-visible:ring-2 peer-focus-visible:ring-sage-400 peer-focus-visible:ring-offset-1"></div>
+                <div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></div>
+              </div>
+            </label>
+          </div>
+
+          <div class="border-t border-warm-200"></div>
+
+          <!-- Rating -->
+          <div>
+            <h3 class="text-xs font-semibold text-warm-500 uppercase tracking-wider mb-3"><span class="t" data-en="Beekeeper Rating">Αξιολόγηση</span></h3>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="radio" name="rating" checked class="w-4 h-4">
+                <span class="text-sm text-honey-500">★★★★★</span>
+                <span class="text-xs text-warm-400">4.5+</span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="radio" name="rating" class="w-4 h-4">
+                <span class="text-sm text-honey-400">★★★★</span>
+                <span class="text-xs text-warm-400">4.0+</span>
+              </label>
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="radio" name="rating" class="w-4 h-4">
+                <span class="text-sm text-warm-700"><span class="t" data-en="Any">Όλα</span></span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Hive Grid -->
+      <main class="flex-1 min-w-0">
+
+        <!-- Results count + view toggle -->
+        <div class="flex items-center justify-between mb-5">
+          <p class="text-sm text-warm-500"><span id="results-count">6 κυψέλες</span></p>
+          <div class="flex items-center gap-2">
+            <button id="btn-grid" onclick="setView('grid')" class="w-9 h-9 flex items-center justify-center rounded-md bg-honey-100 text-honey-700 border border-honey-300" title="Grid view">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg>
+            </button>
+            <button id="btn-list" onclick="setView('list')" class="w-9 h-9 flex items-center justify-center rounded-md border border-warm-200 text-warm-400 hover:bg-warm-100 transition-colors" title="List view">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div id="hive-grid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+
+          <!-- Hive 1 — Hymettus -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="attiki" data-honey="thyme oregano" data-available="true" data-spots="3" data-order="1" data-tier="basic">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-honey-300 to-honey-500"><span class="text-6xl">🐝</span></div>
+                <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80"
+                     alt="Μέλισσες σε κηρήθρα" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-sage-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full">3 <span class="t" data-en="spots">θέσεις</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Hymettus, Attica">Υμηττός, Αττική</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Hymettus Thyme Hive">Κυψέλη Θυμαρισιού Υμηττού</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Hymettus apiary">Μελισσοκόμος · Μελισσοκομείο Υμηττού</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Thyme">Θυμάρι</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Oregano">Ρίγανη</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€90–€120/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-warm-100 text-warm-500 px-2 py-0.5 rounded-full">BASIC</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+          <!-- Hive 2 — Euboea -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="evvoia" data-honey="pine thyme" data-available="true" data-spots="2" data-order="2" data-tier="basic">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-sage-100 to-sage-300"><span class="text-6xl">🌿</span></div>
+                <img src="https://images.unsplash.com/photo-1471943038021-0e5cb1aedc0f?auto=format&fit=crop&w=800&q=80"
+                     alt="Κρητικό τοπίο" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-honey-200 text-honey-800 text-xs font-semibold px-2.5 py-1 rounded-full">2 <span class="t" data-en="spots">θέσεις</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Euboea, Central Greece">Εύβοια, Στερεά Ελλάδα</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Euboea Pine &amp; Thyme Hive">Κυψέλη Πεύκου & Θυμαριού Εύβοιας</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Euboea apiary">Μελισσοκόμος · Μελισσοκομείο Εύβοιας</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Pine">Πεύκο</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Thyme">Θυμάρι</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€90–€120/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-warm-100 text-warm-500 px-2 py-0.5 rounded-full">BASIC</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+          <!-- Hive 3 — Parnassus -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="fokida" data-honey="blossom fir" data-available="true" data-spots="1" data-order="3" data-tier="gold">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-honey-200 to-honey-300"><span class="text-6xl">🏔️</span></div>
+                <img src="https://images.unsplash.com/photo-1587049716454-04f49e2e4d2c?auto=format&fit=crop&w=800&q=80"
+                     alt="Ορεινό τοπίο Ζαγορίου" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-coral-100 text-coral-600 text-xs font-semibold px-2.5 py-1 rounded-full"><span class="t" data-en="Last spot!">Τελευταία θέση!</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Parnassus, Phocis">Παρνασσός, Φωκίδα</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Parnassus Blossom Hive">Κυψέλη Ανθόμελου Παρνασσού</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Parnassus apiary">Μελισσοκόμος · Μελισσοκομείο Παρνασσού</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Blossom">Ανθόμελο</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Fir">Ελατόμελο</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€320–€400/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-honey-100 text-honey-700 px-2 py-0.5 rounded-full">GOLD</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+          <!-- Hive 4 — Fthiotis -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="fthiotida" data-honey="pine blossom" data-available="true" data-spots="5" data-order="4" data-tier="basic">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-honey-100 via-sage-100 to-sage-200"><span class="text-6xl">🌲</span></div>
+                <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
+                     alt="Δάσος Πεύκης Χαλκιδικής" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-sage-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full">5 <span class="t" data-en="spots">θέσεις</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Fthiotis, Central Greece">Φθιώτιδα, Στερεά Ελλάδα</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Fthiotis Pine Hive">Κυψέλη Πεύκου Φθιώτιδας</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Pine &amp; blossom">Μελισσοκόμος · Πεύκο & Ανθόμελο</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Pine">Πεύκο</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Blossom">Ανθόμελο</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€90–€120/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-warm-100 text-warm-500 px-2 py-0.5 rounded-full">BASIC</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+          <!-- Hive 5 — Evrytania -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="evrytania" data-honey="fir wildflower" data-available="true" data-spots="4" data-order="5" data-tier="premium">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-warm-200 to-honey-200"><span class="text-6xl">🌳</span></div>
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
+                     alt="Αρκαδία ορεινό τοπίο" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-sage-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full">4 <span class="t" data-en="spots">θέσεις</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Evrytania, Central Greece">Ευρυτανία, Στερεά Ελλάδα</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Evrytania Fir Honey Hive">Κυψέλη Ελατόμελου Ευρυτανίας</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Fir &amp; wildflower">Μελισσοκόμος · Ελατόμελο & Αγριολούλουδα</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Fir">Ελατόμελο</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Wildflower">Αγριολούλουδα</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€180–€220/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-coral-100 text-coral-600 px-2 py-0.5 rounded-full">PREMIUM</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+          <!-- Hive 6 — Boeotia -->
+          <div class="hive-card bg-white rounded-xl border border-warm-200 shadow-ws overflow-hidden" data-region="voiotia" data-honey="thyme blossom" data-available="true" data-spots="6" data-order="6" data-tier="premium">
+            <div class="relative">
+              <div class="photo-wrap h-48">
+                <div class="fallback bg-gradient-to-br from-sage-200 via-honey-100 to-honey-200"><span class="text-6xl">⛰️</span></div>
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80"
+                     alt="Αγριολούλουδα Ολύμπου" onerror="this.remove()">
+              </div>
+              <span class="absolute top-3 right-3 z-20 bg-honey-200 text-honey-800 text-xs font-semibold px-2.5 py-1 rounded-full">6 <span class="t" data-en="spots">θέσεις</span></span>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-warm-400 mb-1.5"><span class="t" data-en="Boeotia, Central Greece">Βοιωτία, Στερεά Ελλάδα</span></div>
+              <h3 class="font-semibold text-warm-900 mb-1"><span class="t" data-en="Boeotia Thyme &amp; Blossom Hive">Κυψέλη Θυμαριού & Ανθόμελου Βοιωτίας</span></h3>
+              <p class="text-xs text-warm-400 mb-2.5"><span class="t" data-en="Beekeeper · Thyme &amp; blossom">Μελισσοκόμος · Θυμάρι & Ανθόμελο</span></p>
+              <div class="flex flex-wrap gap-1 mb-3">
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Thyme">Θυμάρι</span></span>
+                <span class="bg-honey-100 text-honey-700 text-xs font-medium px-2 py-0.5 rounded-full"><span class="t" data-en="Blossom">Ανθόμελο</span></span>
+              </div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs text-warm-400">€180–€220/<span class="t" data-en="yr">έτος</span></span>
+                <span class="text-xs font-semibold bg-coral-100 text-coral-600 px-2 py-0.5 rounded-full">PREMIUM</span>
+              </div>
+              <a href="hive-detail.html" class="btn-accent flex items-center justify-center h-9 rounded-md text-sm font-semibold"><span class="t" data-en="Adopt This Hive">Υιοθέτησε αυτή</span></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- No results -->
+        <div id="no-results" style="display:none;" class="text-center py-16 col-span-3">
+          <div class="text-5xl mb-4">🐝</div>
+          <p class="font-semibold text-warm-700 mb-1 t" data-en="No hives match your filters">Δεν βρέθηκαν κυψέλες με αυτά τα φίλτρα</p>
+          <p class="text-sm text-warm-400 t" data-en="Try adjusting your selection">Δοκίμασε να αλλάξεις τα φίλτρα σου</p>
+        </div>
+
+        <!-- Load More -->
+        <div id="load-more-wrap" class="text-center mt-10">
+          <button onclick="showLoadMoreMsg()" class="inline-flex items-center gap-2 h-11 px-8 rounded-md border border-warm-200 bg-white text-sm font-semibold text-warm-700 hover:bg-warm-100 shadow-ws transition-colors">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            <span class="t" data-en="Load more hives">Φόρτωση περισσότερων κυψελών</span>
+          </button>
+          <p id="load-more-msg" class="hidden mt-3 text-sm text-warm-400 t" data-en="More hives coming soon 🐝">Περισσότερες κυψέλες σύντομα 🐝</p>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-warm-950 text-warm-600 py-10 mt-16 border-t border-warm-200">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span style="font-size:1.15rem;color:#d4890a;font-family:'Plus Jakarta Sans',sans-serif;line-height:1"><span style="font-weight:300">bee</span><span style="font-weight:700;letter-spacing:0.12em;font-size:0.76em">PARENT</span></span>
+      </div>
+      <div class="flex gap-6 text-sm">
+        <a href="index.html" class="nav-link hover:text-warm-300"><span class="t" data-en="Home">Αρχική</span></a>
+        <a href="#" class="nav-link hover:text-warm-300"><span class="t" data-en="For Farmers">Για Μελισσοκόμους</span></a>
+        <a href="#" class="nav-link hover:text-warm-300"><span class="t" data-en="Privacy">Απόρρητο</span></a>
+        <a href="#" class="nav-link hover:text-warm-300"><span class="t" data-en="Terms">Όροι</span></a>
+      </div>
+      <div class="text-xs text-warm-700">© 2026 Bee Parent</div>
+    </div>
+  </footer>
+
+  <script>
+    var regionLabels = {evvoia:'Εύβοια',fokida:'Φωκίδα',voiotia:'Βοιωτία',fthiotida:'Φθιώτιδα',evrytania:'Ευρυτανία',attiki:'Αττική'};
+    var honeyLabels  = {thyme:'Θυμάρι',wildflower:'Αγριολούλουδα',fir:'Ελατόμελο',pine:'Πεύκο',blossom:'Ανθόμελο',oregano:'Ρίγανη',citrus:'Εσπεριδοειδή'};
+
+    function applyFilters() {
+      var regions = [...document.querySelectorAll('.filter-region:checked')].map(function(el){return el.value;});
+      var honeys  = [...document.querySelectorAll('.filter-honey:checked')].map(function(el){return el.value;});
+      var availOnly = document.getElementById('filter-avail').checked;
+      var tierEl = document.querySelector('input[name="pkg"]:checked');
+      var tier = tierEl ? tierEl.value : 'all';
+      var visible = 0;
+      document.querySelectorAll('.hive-card').forEach(function(card) {
+        var r = card.dataset.region;
+        var h = card.dataset.honey.split(' ');
+        var a = card.dataset.available === 'true';
+        var t = card.dataset.tier;
+        var regionOk = regions.length === 0 || regions.includes(r);
+        var honeyOk  = honeys.length  === 0 || honeys.some(function(v){return h.includes(v);});
+        var availOk  = !availOnly || a;
+        var tierOk   = tier === 'all' || tier === t;
+        var show = regionOk && honeyOk && availOk && tierOk;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+      updateChips(regions, honeys, availOnly);
+      var countEl = document.getElementById('results-count');
+      if (countEl) countEl.textContent = visible + ' κυψέλες';
+    }
+
+    function updateChips(regions, honeys, availOnly) {
+      document.getElementById('chip-avail').style.display = availOnly ? '' : 'none';
+      var rc = document.getElementById('region-chips');
+      rc.innerHTML = regions.map(function(v){
+        return '<span class="inline-flex items-center gap-1.5 bg-sage-100 text-sage-700 border border-sage-200 text-xs font-medium px-2.5 py-1 rounded-full">'+regionLabels[v]+'<button onclick="removeChip(\'region\',\''+v+'\')" class="hover:text-sage-900 transition-colors"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button></span>';
+      }).join('');
+      var hc = document.getElementById('honey-chips');
+      hc.innerHTML = honeys.map(function(v){
+        return '<span class="inline-flex items-center gap-1.5 bg-honey-100 text-honey-700 border border-honey-300 text-xs font-medium px-2.5 py-1 rounded-full">'+honeyLabels[v]+'<button onclick="removeChip(\'honey\',\''+v+'\')" class="hover:text-honey-900 transition-colors"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button></span>';
+      }).join('');
+      var br = document.getElementById('badge-region');
+      br.textContent = regions.length ? regions.length : '';
+      br.classList.toggle('hidden', !regions.length);
+      var bh = document.getElementById('badge-honey');
+      bh.textContent = honeys.length ? honeys.length : '';
+      bh.classList.toggle('hidden', !honeys.length);
+      var anyActive = regions.length || honeys.length || !availOnly;
+      document.getElementById('clear-all-btn').classList.toggle('hidden', !anyActive);
+    }
+
+    function removeChip(type, val) {
+      var el = document.querySelector('.filter-'+type+'[value="'+val+'"]');
+      if (el) { el.checked = false; applyFilters(); }
+    }
+    function removeAvailChip() {
+      document.getElementById('filter-avail').checked = false;
+      applyFilters();
+    }
+    function clearAllFilters() {
+      document.querySelectorAll('.filter-region, .filter-honey').forEach(function(el){el.checked=false;});
+      document.getElementById('filter-avail').checked = false;
+      applyFilters();
+    }
+
+    function showLoadMoreMsg() {
+      var msg = document.getElementById('load-more-msg');
+      msg.classList.remove('hidden');
+      setTimeout(function(){ msg.classList.add('hidden'); }, 3000);
+    }
+
+    function applySort() {
+      var mode = document.getElementById('sort-select').value;
+      var grid = document.getElementById('hive-grid');
+      var cards = [...grid.querySelectorAll('.hive-card')];
+      cards.sort(function(a, b) {
+        if (mode === 'spots-asc')  return parseInt(a.dataset.spots) - parseInt(b.dataset.spots);
+        if (mode === 'spots-desc') return parseInt(b.dataset.spots) - parseInt(a.dataset.spots);
+        return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+      });
+      cards.forEach(function(c){ grid.appendChild(c); });
+    }
+
+    function setView(mode) {
+      var grid = document.getElementById('hive-grid');
+      var btnG = document.getElementById('btn-grid');
+      var btnL = document.getElementById('btn-list');
+      if (mode === 'list') {
+        grid.classList.add('list-view');
+        btnL.classList.add('bg-honey-100','text-honey-700','border-honey-300');
+        btnL.classList.remove('border-warm-200','text-warm-400');
+        btnG.classList.remove('bg-honey-100','text-honey-700','border-honey-300');
+        btnG.classList.add('border-warm-200','text-warm-400');
+      } else {
+        grid.classList.remove('list-view');
+        btnG.classList.add('bg-honey-100','text-honey-700','border-honey-300');
+        btnG.classList.remove('border-warm-200','text-warm-400');
+        btnL.classList.remove('bg-honey-100','text-honey-700','border-honey-300');
+        btnL.classList.add('border-warm-200','text-warm-400');
+      }
+    }
+
+    document.querySelectorAll('.filter-region, .filter-honey').forEach(function(el){
+      el.addEventListener('change', applyFilters);
+    });
+    document.getElementById('filter-avail').addEventListener('change', applyFilters);
+    applyFilters();
+
+    let currentLang = localStorage.getItem('hh-lang') || 'el';
+    function toggleLang() {
+      currentLang = currentLang === 'el' ? 'en' : 'el';
+      localStorage.setItem('hh-lang', currentLang);
+      applyLang();
+    }
+    function applyLang() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('.t').forEach(el => {
+        if (!el._el) el._el = el.textContent.trim();
+        el.textContent = (currentLang === 'en' && el.dataset.en) ? el.dataset.en : el._el;
+      });
+      const btn = document.getElementById('lang-btn');
+      if (btn) {
+        btn.querySelector('.lang-flag').textContent = currentLang === 'el' ? '🇬🇷' : '🇬🇧';
+        btn.querySelector('.lang-code').textContent = currentLang === 'el' ? 'ΕΛ' : 'EN';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      currentLang = localStorage.getItem('hh-lang') || 'el';
+      applyLang();
+    });
+  </script>
+
+  <!-- Flying bee with trail -->
+  <canvas id="bee-trail" style="position:fixed;top:0;left:0;z-index:24;pointer-events:none;"></canvas>
+  <div id="fly-bee" style="position:fixed;top:0;left:0;z-index:25;pointer-events:none;will-change:transform">
+    <svg width="52" height="44" viewBox="0 0 52 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g style="transform-box:fill-box;transform-origin:50% 100%;animation:bee-wing-beat .1s ease-in-out infinite alternate">
+        <ellipse cx="22" cy="12" rx="14" ry="9" fill="white" fill-opacity="0.88" stroke="#22c55e" stroke-width="0.9"/>
+        <ellipse cx="36" cy="12" rx="11" ry="7.5" fill="white" fill-opacity="0.78" stroke="#22c55e" stroke-width="0.9"/>
+      </g>
+      <ellipse cx="24" cy="28" rx="16" ry="10" fill="#f8c74a" stroke="#d4890a" stroke-width="1.2"/>
+      <ellipse cx="20" cy="28" rx="4.5" ry="9.5" fill="#2d1802" fill-opacity="0.22"/>
+      <ellipse cx="27" cy="28" rx="3.5" ry="9" fill="#2d1802" fill-opacity="0.15"/>
+      <circle cx="40" cy="28" r="8" fill="#f8c74a" stroke="#d4890a" stroke-width="1.2"/>
+      <circle cx="43" cy="26" r="2.5" fill="#2d1802"/>
+      <circle cx="43.8" cy="25.2" r="0.9" fill="white"/>
+      <path d="M37 21 Q38 13 34 8" stroke="#d4890a" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <path d="M43 21 Q45 13 49 8" stroke="#d4890a" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <circle cx="34" cy="8" r="2.2" fill="#d4890a"/>
+      <circle cx="49" cy="8" r="2.2" fill="#d4890a"/>
+      <path d="M8 28 L2 27" stroke="#d4890a" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <script>
+    (function(){
+      var cvs=document.getElementById('bee-trail');
+      var ctx=cvs.getContext('2d');
+      var el=document.getElementById('fly-bee');
+      function resize(){cvs.width=window.innerWidth;cvs.height=window.innerHeight;}
+      resize();window.addEventListener('resize',resize);
+      var trail=[],MAX=55,frame=0,seed=Math.random(),ph=seed*Math.PI*2,DUR=15000+seed*7000,t0=null;
+      function tick(ts){
+        if(!t0)t0=ts-seed*DUR*0.75;
+        var p=((ts-t0)%DUR)/DUR;
+        var W=window.innerWidth,H=window.innerHeight;
+        var x=-70+p*(W+140);
+        var y=H*0.36+Math.sin(p*Math.PI*4+ph)*95+Math.sin(p*Math.PI*11+ph*1.4)*33;
+        var dyt=Math.cos(p*Math.PI*4+ph)*95*Math.PI*4+Math.cos(p*Math.PI*11+ph*1.4)*33*Math.PI*11;
+        var ang=Math.max(-22,Math.min(22,dyt/DUR*1000*0.054));
+        el.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+ang.toFixed(1)+'deg)';
+        frame++;
+        if(frame%6===0){trail.push({x:x+24,y:y+28});if(trail.length>MAX)trail.shift();}
+        ctx.clearRect(0,0,cvs.width,cvs.height);
+        for(var i=0;i<trail.length;i++){
+          var frac=i/MAX;
+          ctx.beginPath();
+          ctx.arc(trail[i].x,trail[i].y,1.2+frac*2.2,0,Math.PI*2);
+          ctx.fillStyle='rgba(45,24,2,'+(frac*0.55)+')';
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <!-- Chat Widget: Talk to your beekeeper -->
+  <div id="bk-chat" style="position:fixed;bottom:24px;right:24px;z-index:50;font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
+    <div id="bk-panel" style="display:none;position:absolute;bottom:68px;right:0;width:316px;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgb(0 0 0/.18),0 4px 16px rgb(0 0 0/.1);">
+      <div style="background:linear-gradient(135deg,#15803d 0%,#16a34a 100%);padding:14px 16px;display:flex;align-items:center;gap:11px;">
+        <div style="width:42px;height:42px;border-radius:50%;background:#fdf0c9;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8f5205;font-size:14px;flex-shrink:0;border:2.5px solid rgba(255,255,255,.35);box-shadow:0 2px 6px rgb(0 0 0/.15);">ΜΣ</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:700;color:#fff;font-size:14px;line-height:1.2;">Μαρία Σταματίου</div>
+          <div style="font-size:11.5px;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:5px;margin-top:2px;"><span style="width:7px;height:7px;background:#86efac;border-radius:50%;flex-shrink:0;"></span>Μελισσοκόμος · Υμηττός</div>
+        </div>
+        <button onclick="bkToggle()" style="background:none;border:none;cursor:pointer;padding:4px;color:rgba(255,255,255,.65);line-height:0;" title="Κλείσιμο"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div id="bk-msgs" style="padding:14px;display:flex;flex-direction:column;gap:10px;max-height:228px;overflow-y:auto;background:#fafaf6;scroll-behavior:smooth;">
+        <div style="display:flex;align-items:flex-end;gap:8px;"><div style="width:26px;height:26px;border-radius:50%;background:#fdf0c9;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8f5205;font-size:9px;flex-shrink:0;">ΜΣ</div><div style="background:#fff;border:1px solid #e8e8e0;border-radius:14px 14px 14px 3px;padding:9px 12px;font-size:13px;color:#1e1e1b;line-height:1.5;max-width:220px;box-shadow:0 1px 3px rgb(0 0 0/.05);">Γεια σου! 🐝 Είμαι η Μαρία, μελισσοκόμος στον Υμηττό εδώ και 12 χρόνια.</div></div>
+        <div style="display:flex;align-items:flex-end;gap:8px;"><div style="width:26px;height:26px;border-radius:50%;background:#fdf0c9;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8f5205;font-size:9px;flex-shrink:0;">ΜΣ</div><div style="background:#fff;border:1px solid #e8e8e0;border-radius:14px 14px 14px 3px;padding:9px 12px;font-size:13px;color:#1e1e1b;line-height:1.5;max-width:220px;box-shadow:0 1px 3px rgb(0 0 0/.05);">Μπορείς να με ρωτήσεις για τις κυψέλες μου, το μέλι ή τη διαδικασία υιοθεσίας 🍯</div></div>
+      </div>
+      <div style="padding:10px 12px;border-top:1px solid #e8e8e0;background:#fff;display:flex;gap:8px;align-items:center;">
+        <input id="bk-inp" type="text" placeholder="Γράψε ένα μήνυμα…" onkeydown="if(event.key==='Enter')bkSend()" style="flex:1;border:1.5px solid #e8e8e0;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;font-family:inherit;color:#1e1e1b;background:#fafaf6;transition:border-color 150ms;" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e8e8e0'">
+        <button onclick="bkSend()" style="width:34px;height:34px;border-radius:50%;background:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 150ms;" onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'"><svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <button id="bk-btn" onclick="bkToggle()" style="width:54px;height:54px;border-radius:50%;background:#16a34a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgb(22 163 74/.40);transition:transform 150ms,box-shadow 150ms;" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 6px 22px rgb(22 163 74/.5)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgb(22 163 74/.40)'">
+      <svg id="bk-ico-chat" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg id="bk-ico-close" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="bk-badge" style="position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#d4890a;border-radius:50%;border:2px solid #fafaf6;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;pointer-events:none;">1</div>
+  </div>
+  <script>
+    (function(){
+      var open=false,idx=0;
+      var replies=['Το θυμαρίσιο μέλι μας έχει μοναδικό άρωμα — ο Υμηττός είναι ανεπανάληπτος! 🌿','Η συγκομιδή γίνεται 2–3 φορές το χρόνο. Στέλνω πάντα ειδοποίηση πριν! 📦','Μπορείς να επισκεφτείς το μελισσοκομείο με το GOLD πακέτο — σε περιμένω! 🐝','Φέτος η άνοιξη ήταν εξαιρετική. Η παραγωγή δείχνει πολύ καλή 🌸','Στέλνω ενημέρωση κάθε τρεις μήνες με φωτογραφίες από την κυψέλη σου!','Το μέλι μου δεν έχει καμία επεξεργασία — αυτό που βγαίνει από την κυψέλη, το παίρνεις εσύ 🍯'];
+      window.bkToggle=function(){open=!open;document.getElementById('bk-panel').style.display=open?'block':'none';document.getElementById('bk-ico-chat').style.display=open?'none':'block';document.getElementById('bk-ico-close').style.display=open?'block':'none';document.getElementById('bk-badge').style.display='none';if(open){var m=document.getElementById('bk-msgs');m.scrollTop=m.scrollHeight;}};
+      window.bkSend=function(){var inp=document.getElementById('bk-inp'),msgs=document.getElementById('bk-msgs'),txt=inp.value.trim();if(!txt)return;var u=document.createElement('div');u.style.cssText='display:flex;justify-content:flex-end;';u.innerHTML='<div style="background:#16a34a;border-radius:14px 14px 3px 14px;padding:9px 12px;font-size:13px;color:#fff;line-height:1.5;max-width:220px;">'+txt+'</div>';msgs.appendChild(u);inp.value='';msgs.scrollTop=msgs.scrollHeight;setTimeout(function(){var t=document.createElement('div');t.id='bk-typing';t.style.cssText='display:flex;align-items:flex-end;gap:8px;';t.innerHTML='<div style="width:26px;height:26px;border-radius:50%;background:#fdf0c9;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8f5205;font-size:9px;flex-shrink:0;">ΜΣ</div><div style="background:#fff;border:1px solid #e8e8e0;border-radius:14px 14px 14px 3px;padding:9px 12px;font-size:18px;line-height:1;color:#aeaea4;letter-spacing:2px;">···</div>';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;setTimeout(function(){var ty=document.getElementById('bk-typing');if(ty)ty.remove();var r=document.createElement('div');r.style.cssText='display:flex;align-items:flex-end;gap:8px;';r.innerHTML='<div style="width:26px;height:26px;border-radius:50%;background:#fdf0c9;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8f5205;font-size:9px;flex-shrink:0;">ΜΣ</div><div style="background:#fff;border:1px solid #e8e8e0;border-radius:14px 14px 14px 3px;padding:9px 12px;font-size:13px;color:#1e1e1b;line-height:1.5;max-width:220px;box-shadow:0 1px 3px rgb(0 0 0/.05);">'+replies[idx%replies.length]+'</div>';idx++;msgs.appendChild(r);msgs.scrollTop=msgs.scrollHeight;},1200);},400);};
+    })();
+  </script>
+</body>
+</html>

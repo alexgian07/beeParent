@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bee Parent — Για Εταιρείες & Οργανισμούς</title>
+  <link rel="icon" type="image/png" href="Docs/LOGO_transparent.PNG">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            honey: {50:'#fef9ec',100:'#fdf0c9',200:'#fbdf93',300:'#f8c74a',400:'#f4b824',500:'#d4890a',600:'#b36c06',700:'#8f5205',800:'#6a3c04',900:'#4a2903',950:'#2d1802'},
+            coral: {50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c'},
+            sage:  {50:'#f0fdf6',100:'#dcfce9',200:'#bbf7d2',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d'},
+            warm:  {50:'#fafaf6',100:'#f5f5ef',200:'#e8e8e0',300:'#d5d5cb',400:'#aeaea4',500:'#838379',600:'#5e5e55',700:'#444440',800:'#2f2f2c',900:'#1e1e1b',950:'#131310'}
+          },
+          fontFamily: {sans:['Plus Jakarta Sans','system-ui','sans-serif']},
+          borderRadius: {sm:'6px',DEFAULT:'10px',md:'10px',lg:'14px',xl:'20px','2xl':'28px'},
+          boxShadow: {
+            ws:'0 1px 4px 0 rgb(74 41 3/.08),0 1px 2px -1px rgb(74 41 3/.05)',
+            wm:'0 4px 12px -2px rgb(74 41 3/.10),0 2px 4px -2px rgb(74 41 3/.06)',
+            wl:'0 10px 24px -4px rgb(74 41 3/.12),0 4px 8px -4px rgb(74 41 3/.08)',
+            wx:'0 20px 40px -8px rgb(74 41 3/.15),0 8px 16px -8px rgb(74 41 3/.08)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{background:#fafaf6;color:#1e1e1b;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+    .gradient-text{background:linear-gradient(135deg,#d4890a,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .honeycomb-bg{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104' viewBox='0 0 60 104'%3E%3Cpath d='M30 2L2 18v34l28 16 28-16V18z' fill='none' stroke='%23d4890a' stroke-width='.8' opacity='.09'/%3E%3Cpath d='M30 54L2 70v34l28 16 28-16V70z' fill='none' stroke='%23d4890a' stroke-width='.8' opacity='.09'/%3E%3C/svg%3E");}
+    .btn-accent{background:#16a34a;color:#fff;transition:all 150ms ease-in-out;}
+    .btn-accent:hover{background:#15803d;}
+    .btn-accent:active{transform:scale(.97);}
+    .btn-ghost{color:#1e1e1b;border:1.5px solid #e8e8e0;transition:background 150ms ease-in-out;}
+    .btn-ghost:hover{background:#f5f5ef;}
+    .nav-link{transition:color 150ms ease-in-out;}
+    .nav-link:hover{color:#d4890a;}
+    :focus-visible{outline:2px solid #16a34a;outline-offset:2px;border-radius:6px;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    a{text-decoration:none;}
+    .tier-card{transition:transform 220ms ease-out,box-shadow 220ms ease-out;}
+    .tier-card:hover{transform:translateY(-4px);}
+    .check-cell{text-align:center;color:#16a34a;}
+    .table-row:nth-child(even){background:#fafaf6;}
+    .table-row:nth-child(odd){background:#ffffff;}
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Nav -->
+  <nav class="sticky top-0 z-30 bg-warm-50/95 backdrop-blur-md" style="overflow:visible">
+    <div class="w-full px-4 h-24 flex items-center justify-between gap-4" style="overflow:visible">
+      <a href="index.html" class="flex items-center gap-2 flex-shrink-0" style="align-self:flex-start;padding-top:3px">
+        <img src="Docs/LOGO_transparent.PNG" alt="bee PARENT" style="height:92px;width:auto;">
+      </a>
+      <div class="hidden md:flex items-center gap-7 flex-1 justify-center">
+        <a href="index.html#how-it-works" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="How It Works">Πώς Λειτουργεί</span></a>
+        <a href="marketplace.html" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="Find a Hive">Βρες Κυψέλη</span></a>
+        <a href="index.html#for-beekeepers" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="For Beekeepers">Για Μελισσοκόμους</span></a>
+        <a href="companies.html" class="nav-link text-sm font-medium text-warm-900 border-b-2 border-honey-500 pb-0.5"><span class="t" data-en="For Companies">Για Εταιρείες</span></a>
+        <a href="about.html" class="nav-link text-sm font-medium text-warm-600"><span class="t" data-en="About">Σχετικά</span></a>
+      </div>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <button id="lang-btn" onclick="toggleLang()"
+          class="flex items-center gap-1 h-8 px-2.5 rounded-md border border-warm-200 hover:bg-warm-100 transition-colors"
+          title="Αλλαγή γλώσσας / Switch language">
+          <span class="lang-flag text-sm leading-none">🇬🇷</span>
+          <span class="lang-code text-xs font-semibold text-warm-600">ΕΛ</span>
+        </button>
+        <a href="dashboard.html" class="hidden sm:inline-flex text-sm font-medium text-warm-600 nav-link"><span class="t" data-en="Log In">Σύνδεση</span></a>
+        <a href="mailto:business@beeparent.gr" class="btn-accent inline-flex items-center gap-2 h-9 px-4 rounded-md text-sm font-semibold">
+          <span class="t" data-en="Get in Touch">Επικοινωνήστε</span>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="honeycomb-bg bg-warm-100 py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-warm-200/40 via-transparent to-warm-100/60 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-honey-100 text-honey-700 rounded-full px-4 py-1.5 text-xs font-semibold mb-6 shadow-ws">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          <span class="t" data-en="B2B Partnership Program">Πρόγραμμα Εταιρικής Συνεργασίας</span>
+        </div>
+        <h1 class="text-[clamp(2.25rem,5vw,3.5rem)] font-extrabold text-warm-950 tracking-tight leading-[1.1] mb-6">
+          <span class="t" data-en="Corporate Hive Program">Corporate Hive Program</span><br>
+          <span class="gradient-text">ESG με ουσία</span>
+        </h1>
+        <p class="text-lg text-warm-500 leading-relaxed mb-8 max-w-2xl mx-auto t" data-en="Support Greek beekeeping, strengthen your ESG impact, and give your people a meaningful connection to nature — all in one partnership.">Στηρίξτε την ελληνική μελισσοκομία, ενισχύστε το ESG αποτύπωμά σας και δώστε στους ανθρώπους σας μια αληθινή σύνδεση με τη φύση — όλα σε μία συνεργασία.</p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="#packages" class="btn-accent inline-flex items-center gap-2 h-11 px-6 rounded-md text-sm font-semibold">
+            <span class="t" data-en="View Packages">Δείτε τα Πακέτα</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#special-projects" class="btn-ghost inline-flex items-center gap-2 h-11 px-6 rounded-md text-sm font-semibold">
+            <span class="t" data-en="Special Projects">Special Projects</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Trust bar -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="bg-white/80 rounded-2xl px-4 py-4 text-center shadow-ws">
+          <div class="text-2xl font-black text-honey-600 mb-0.5">1.5M+</div>
+          <div class="text-xs text-warm-500 t" data-en="Beehives in Greece">Μελίσσια στην Ελλάδα</div>
+        </div>
+        <div class="bg-white/80 rounded-2xl px-4 py-4 text-center shadow-ws">
+          <div class="text-2xl font-black text-sage-600 mb-0.5">247</div>
+          <div class="text-xs text-warm-500 t" data-en="Partner Beekeepers">Συνεργάτες Μελισσοκόμοι</div>
+        </div>
+        <div class="bg-white/80 rounded-2xl px-4 py-4 text-center shadow-ws">
+          <div class="text-2xl font-black text-honey-600 mb-0.5">8</div>
+          <div class="text-xs text-warm-500 t" data-en="Regions">Περιοχές</div>
+        </div>
+        <div class="bg-white/80 rounded-2xl px-4 py-4 text-center shadow-ws">
+          <div class="text-2xl font-black text-sage-600 mb-0.5">100%</div>
+          <div class="text-xs text-warm-500 t" data-en="Greek & Certified">Ελληνικό & Πιστοποιημένο</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Corporate Adoption -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-[clamp(1.5rem,2.5vw,2rem)] font-bold text-warm-950 tracking-tight mb-3 t" data-en="Ideal for companies that...">Ιδανικό για εταιρείες που...</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-sage-50 rounded-2xl p-6 border border-sage-100">
+          <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-warm-800 leading-snug t" data-en="Invest in ESG & CSR initiatives">Επενδύουν σε δράσεις ESG & CSR</p>
+        </div>
+        <div class="bg-honey-50 rounded-2xl p-6 border border-honey-100">
+          <div class="w-10 h-10 rounded-xl bg-honey-100 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-warm-800 leading-snug t" data-en="Want authentic partnerships with real social impact">Επιθυμούν αυθεντικές συνεργασίες με θετικό αντίκτυπο</p>
+        </div>
+        <div class="bg-sage-50 rounded-2xl p-6 border border-sage-100">
+          <div class="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-warm-800 leading-snug t" data-en="Want to engage their people in meaningful actions">Θέλουν να εμπλέξουν τους ανθρώπους τους σε δράσεις με νόημα</p>
+        </div>
+        <div class="bg-honey-50 rounded-2xl p-6 border border-honey-100">
+          <div class="w-10 h-10 rounded-xl bg-honey-100 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-warm-800 leading-snug t" data-en="Seek unique branded gifts for clients & partners">Αναζητούν μοναδικά δώρα με το brand τους για πελάτες</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages" class="py-20 bg-warm-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <div class="text-xs font-semibold text-warm-400 uppercase tracking-[0.1em] mb-3 t" data-en="Partnership Tiers">Επίπεδα Συνεργασίας</div>
+        <h2 class="text-[clamp(1.875rem,3vw,2.25rem)] font-bold text-warm-950 tracking-tight t" data-en="Choose Your Hive Program">Επιλέξτε το Πρόγραμμά σας</h2>
+        <p class="text-warm-500 mt-2 max-w-xl mx-auto t" data-en="Flexible corporate packages tailored to your company size and sustainability goals.">Ευέλικτα εταιρικά πακέτα προσαρμοσμένα στο μέγεθος και τους στόχους βιωσιμότητάς σας.</p>
+      </div>
+
+      <!-- Tier cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+
+        <!-- Green Hive -->
+        <div class="tier-card bg-white rounded-2xl border border-warm-200 shadow-wm overflow-hidden">
+          <div class="bg-gradient-to-br from-sage-600 to-sage-700 p-7 text-white">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-sage-200 uppercase tracking-wider">Green Hive</div>
+                <div class="text-lg font-bold">1–5 κυψέλες</div>
+              </div>
+            </div>
+            <div class="text-3xl font-black mb-0.5">€1.500</div>
+            <div class="text-sm text-sage-200 t" data-en="per year">/έτος</div>
+          </div>
+          <div class="p-6 space-y-3">
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Hive adoption with your company's name">Υιοθεσία κυψελών με το όνομά σας</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Branded honey products with your label">Προϊόντα μελιού με εταιρική ετικέτα</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="2 photo/video updates per year">2 ενημερώσεις φωτό & video/έτος</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Annual ESG impact report">Ετήσια αναφορά αντίκτυπου (ESG)</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Employee engagement — online presentation">Εμπλοκή εργαζομένων (online παρουσίαση)</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Logo on Bee Parent channels">Λογότυπο στα κανάλια Bee Parent</span>
+            </div>
+            <div class="pt-4">
+              <a href="mailto:business@beeparent.gr" class="block w-full text-center bg-sage-50 hover:bg-sage-100 transition-colors text-sage-700 font-semibold text-sm py-2.5 rounded-xl border border-sage-200 t" data-en="Get Started">Ξεκινήστε</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Golden Hive — highlighted -->
+        <div class="tier-card bg-white rounded-2xl border-2 border-honey-400 shadow-wx overflow-hidden relative">
+          <div class="absolute top-4 right-4 bg-honey-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider t" data-en="Most Popular">Πιο Δημοφιλές</div>
+          <div class="bg-gradient-to-br from-honey-500 to-honey-600 p-7 text-white">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-honey-100 uppercase tracking-wider">Golden Hive</div>
+                <div class="text-lg font-bold">6–20 κυψέλες</div>
+              </div>
+            </div>
+            <div class="text-3xl font-black mb-0.5">€3.500</div>
+            <div class="text-sm text-honey-100 t" data-en="per year">/έτος</div>
+          </div>
+          <div class="p-6 space-y-3">
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Everything in Green Hive">Όλα του Green Hive</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Quarterly photo/video updates">Ενημερώσεις κάθε 3 μήνες</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Annual analytical ESG report">Ετήσια αναλυτική αναφορά ESG</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Online presentation + 1 workshop for employees">Online παρουσίαση + 1 workshop εργαζομένων</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Branded gifts for clients & partners">Εταιρικά δώρα για πελάτες & συνεργάτες</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Logo + report on Bee Parent channels">Λογότυπο & αναφορά στα κανάλια Bee Parent</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Beekeeper + local community support">Στήριξη μελισσοκόμου & τοπικής κοινότητας</span>
+            </div>
+            <div class="pt-4">
+              <a href="mailto:business@beeparent.gr" class="btn-accent block w-full text-center font-semibold text-sm py-2.5 rounded-xl t" data-en="Get Started">Ξεκινήστε</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Hive -->
+        <div class="tier-card bg-white rounded-2xl border border-warm-200 shadow-wm overflow-hidden">
+          <div class="bg-gradient-to-br from-warm-800 to-warm-950 p-7 text-white">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f8c74a" stroke-width="2.2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-warm-400 uppercase tracking-wider">Premium Hive</div>
+                <div class="text-lg font-bold">21+ κυψέλες</div>
+              </div>
+            </div>
+            <div class="text-3xl font-black mb-0.5">€5.000<span class="text-lg font-semibold text-warm-400">+</span></div>
+            <div class="text-sm text-warm-400 t" data-en="per year">/έτος</div>
+          </div>
+          <div class="p-6 space-y-3">
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Everything in Golden Hive">Όλα του Golden Hive</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Monthly photo/video updates">Μηνιαίες ενημερώσεις φωτό & video</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Annual ESG report with KPIs">Ετήσια αναλυτική ESG με KPIs</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Apiary visit + immersive employee experience">Επίσκεψη στο μελισσοκομείο & βιωματική εμπειρία</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Posts & case study on Bee Parent channels">Αναρτήσεις & case study στα κανάλια Bee Parent</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 t" data-en="Beekeeper, community & environmental action support">Στήριξη μελισσοκόμου, κοινότητας & περιβαλλοντικών δράσεων</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-sm text-warm-700 font-semibold t" data-en="Dedicated account manager">Dedicated account manager</span>
+            </div>
+            <div class="pt-4">
+              <a href="mailto:business@beeparent.gr" class="block w-full text-center bg-warm-900 hover:bg-warm-950 transition-colors text-white font-semibold text-sm py-2.5 rounded-xl t" data-en="Contact Us">Επικοινωνήστε μαζί μας</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comparison table -->
+      <div class="bg-white rounded-2xl shadow-wm border border-warm-200 overflow-hidden">
+        <div class="bg-warm-900 text-white px-6 py-4 text-center">
+          <h3 class="font-bold text-base t" data-en="Full Feature Comparison">Πλήρης Σύγκριση Χαρακτηριστικών</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-warm-100">
+                <th class="text-left px-6 py-4 text-warm-500 font-semibold w-[40%] t" data-en="Feature">Χαρακτηριστικό</th>
+                <th class="px-4 py-4 text-center text-sage-700 font-bold">Green<br><span class="text-xs font-normal text-warm-400">1–5 κυψέλες</span></th>
+                <th class="px-4 py-4 text-center text-honey-600 font-bold bg-honey-50">Golden<br><span class="text-xs font-normal text-warm-400">6–20 κυψέλες</span></th>
+                <th class="px-4 py-4 text-center text-warm-700 font-bold">Premium<br><span class="text-xs font-normal text-warm-400">21+ κυψέλες</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Hive adoption">Υιοθεσία κυψελών</td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center bg-honey-50"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Branded honey products">Προϊόντα με εταιρική ετικέτα</td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center bg-honey-50"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Photo & video updates">Ενημερώσεις φωτό & video</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs font-medium t" data-en="2×/year">2×/έτος</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs font-medium bg-honey-50 t" data-en="Every 3 months">Κάθε 3 μήνες</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs font-medium t" data-en="Monthly">Κάθε μήνα</td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="ESG Impact Report">Αναφορά αντίκτυπου ESG</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Annual">Ετήσια</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs bg-honey-50 t" data-en="Analytical">Αναλυτική</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Analytical + KPIs">Αναλυτική + KPIs</td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Employee engagement">Εμπλοκή εργαζομένων</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Online presentation">Online παρουσίαση</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs bg-honey-50 t" data-en="Online + 1 workshop">Online + 1 workshop</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Visit + experience">Επίσκεψη & εμπειρία</td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Corporate gifts">Εταιρικά δώρα</td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center bg-honey-50"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+              </tr>
+              <tr class="table-row border-b border-warm-100">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Promotion on Bee Parent channels">Προβολή στα κανάλια Bee Parent</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Logo">Λογότυπο</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs bg-honey-50 t" data-en="Logo + report">Λογότυπο + αναφορά</td>
+                <td class="px-4 py-3.5 text-center text-warm-500 text-xs t" data-en="Posts & case study">Αναρτήσεις & case study</td>
+              </tr>
+              <tr class="table-row">
+                <td class="px-6 py-3.5 text-warm-700 t" data-en="Dedicated account manager">Dedicated account manager</td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d5d5cb" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></td>
+                <td class="px-4 py-3.5 text-center bg-honey-50"><svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d5d5cb" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></td>
+                <td class="px-4 py-3.5 text-center"><svg class="mx-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Projects -->
+  <section id="special-projects" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Header -->
+      <div class="text-center mb-14">
+        <div class="text-xs font-semibold text-warm-400 uppercase tracking-[0.1em] mb-3 t" data-en="Custom Partnerships">Tailor-Made Συνεργασίες</div>
+        <h2 class="text-[clamp(1.875rem,3vw,2.5rem)] font-extrabold text-warm-950 tracking-tight mb-3">
+          Special Projects
+        </h2>
+        <p class="text-warm-500 text-lg max-w-2xl mx-auto t" data-en="We design unique actions around bees, sustainability and education — together with you.">Σχεδιάζουμε μαζί σας μοναδικές δράσεις γύρω από τη μέλισσα, τη βιωσιμότητα και την εκπαίδευση.</p>
+        <div class="mt-4 inline-block bg-honey-100 text-honey-800 font-semibold text-sm px-5 py-2 rounded-full italic">«Η ιδέα σας, η λύση μας!»</div>
+      </div>
+
+      <!-- For whom -->
+      <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-warm-900 text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider mb-6 t" data-en="For Whom">Για Ποιους</div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div class="text-center p-5 bg-warm-50 rounded-2xl border border-warm-100 hover:border-honey-300 hover:bg-honey-50 transition-colors">
+            <div class="w-14 h-14 rounded-full bg-honey-100 flex items-center justify-center mx-auto mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="text-xs font-bold text-warm-800 t" data-en="Universities & Research">Πανεπιστήμια</div>
+            <div class="text-[10px] text-warm-400 mt-0.5 t" data-en="& Research institutes">& Ερευνητικά Ιδρύματα</div>
+          </div>
+          <div class="text-center p-5 bg-warm-50 rounded-2xl border border-warm-100 hover:border-honey-300 hover:bg-honey-50 transition-colors">
+            <div class="w-14 h-14 rounded-full bg-sage-100 flex items-center justify-center mx-auto mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="text-xs font-bold text-warm-800 t" data-en="Schools">Σχολεία</div>
+            <div class="text-[10px] text-warm-400 mt-0.5 t" data-en="& Education bodies">& Εκπαιδευτικοί Φορείς</div>
+          </div>
+          <div class="text-center p-5 bg-warm-50 rounded-2xl border border-warm-100 hover:border-honey-300 hover:bg-honey-50 transition-colors">
+            <div class="w-14 h-14 rounded-full bg-honey-100 flex items-center justify-center mx-auto mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <div class="text-xs font-bold text-warm-800 t" data-en="Companies">Εταιρείες</div>
+            <div class="text-[10px] text-warm-400 mt-0.5 t" data-en="& Organisations">& Οργανισμοί</div>
+          </div>
+          <div class="text-center p-5 bg-warm-50 rounded-2xl border border-warm-100 hover:border-honey-300 hover:bg-honey-50 transition-colors">
+            <div class="w-14 h-14 rounded-full bg-sage-100 flex items-center justify-center mx-auto mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div class="text-xs font-bold text-warm-800 t" data-en="Municipalities">Δήμοι</div>
+            <div class="text-[10px] text-warm-400 mt-0.5 t" data-en="& Social bodies">& Κοινωνικοί Φορείς</div>
+          </div>
+          <div class="text-center p-5 bg-warm-50 rounded-2xl border border-warm-100 hover:border-honey-300 hover:bg-honey-50 transition-colors col-span-2 md:col-span-1">
+            <div class="w-14 h-14 rounded-full bg-honey-100 flex items-center justify-center mx-auto mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div class="text-xs font-bold text-warm-800 t" data-en="Anyone with a unique idea">Οποιοσδήποτε</div>
+            <div class="text-[10px] text-warm-400 mt-0.5 t" data-en="with a unique idea">με μια ξεχωριστή ιδέα</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What we can design + Examples + How it works -->
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- What we design -->
+        <div class="bg-warm-50 rounded-2xl border border-warm-200 p-7">
+          <div class="inline-flex items-center gap-2 bg-warm-900 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6 t" data-en="What we can design together">Τι Μπορούμε να Σχεδιάσουμε Μαζί</div>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-honey-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="Educational programs & workshops">Εκπαιδευτικά προγράμματα & εργαστήρια</div>
+                <div class="text-xs text-warm-400 t" data-en="for students, employees or groups">για μαθητές, εργαζόμενους ή ομάδες</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-sage-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="Research projects">Ερευνητικά projects</div>
+                <div class="text-xs text-warm-400 t" data-en="& beekeeping ecosystem monitoring">& παρακολούθηση μελισσοσυστημάτων</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-honey-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="CSR / ESG corporate programmes">Εταιρικά προγράμματα CSR / ESG</div>
+                <div class="text-xs text-warm-400 t" data-en="with measurable social & environmental impact">με μετρήσιμο κοινωνικό & περιβαλλοντικό αντίκτυπο</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-sage-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="Special events & experiential actions">Ειδικά events & experiential δράσεις</div>
+                <div class="text-xs text-warm-400 t" data-en="at the apiary or at your venue">στο μελισσοκομείο ή στον χώρο σας</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-honey-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d4890a" stroke-width="2.2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="Custom products & branded honey">Custom προϊόντα & branded μέλι</div>
+                <div class="text-xs text-warm-400 t" data-en="with your identity">με τη δική σας ταυτότητα</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-sage-100 flex items-center justify-center flex-shrink-0">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-warm-800 t" data-en="Partnerships with social footprint">Συνεργασίες με κοινωνικό αποτύπωμα</div>
+                <div class="text-xs text-warm-400 t" data-en="for communities and local causes">για κοινότητες & τοπικές δράσεις</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project examples -->
+        <div class="bg-warm-50 rounded-2xl border border-warm-200 p-7">
+          <div class="inline-flex items-center gap-2 bg-sage-700 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6 t" data-en="Project Examples">Παραδείγματα Special Projects</div>
+          <div class="space-y-4">
+            <div class="bg-white rounded-xl p-4 border border-warm-100 shadow-ws">
+              <div class="flex items-start gap-3">
+                <span class="text-lg flex-shrink-0">🌿</span>
+                <div>
+                  <div class="text-sm font-bold text-warm-800 mb-0.5 t" data-en='"Adopt a Hive" for a school or university'>"Adopt a Hive" για σχολείο ή πανεπιστήμιο</div>
+                  <div class="text-xs text-warm-400 t" data-en="with educational content and year-round monitoring">με εκπαιδευτικό υλικό και παρακολούθηση όλης της χρονιάς</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-warm-100 shadow-ws">
+              <div class="flex items-start gap-3">
+                <span class="text-lg flex-shrink-0">🔬</span>
+                <div>
+                  <div class="text-sm font-bold text-warm-800 mb-0.5 t" data-en="Beekeeping & Biodiversity">Μελισσοκομία & Βιοποικιλότητα</div>
+                  <div class="text-xs text-warm-400 t" data-en="collaborative field research programme">συνεργατικό ερευνητικό πρόγραμμα πεδίου</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-warm-100 shadow-ws">
+              <div class="flex items-start gap-3">
+                <span class="text-lg flex-shrink-0">🤝</span>
+                <div>
+                  <div class="text-sm font-bold text-warm-800 mb-0.5 t" data-en="Corporate volunteering at the apiary">Εταιρική εθελοντική δράση στο μελισσοκομείο</div>
+                  <div class="text-xs text-warm-400 t" data-en="team building & immersive experience">με team building & βιωματική εμπειρία</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-warm-100 shadow-ws">
+              <div class="flex items-start gap-3">
+                <span class="text-lg flex-shrink-0">🎁</span>
+                <div>
+                  <div class="text-sm font-bold text-warm-800 mb-0.5 t" data-en="Thematic corporate gift design">Σχεδιασμός θεματικού εταιρικού δώρου</div>
+                  <div class="text-xs text-warm-400 t" data-en="for clients or partners">σε πελάτες ή συνεργάτες</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-warm-100 shadow-ws">
+              <div class="flex items-start gap-3">
+                <span class="text-lg flex-shrink-0">💛</span>
+                <div>
+                  <div class="text-sm font-bold text-warm-800 mb-0.5 t" data-en="Support for social initiatives">Υποστήριξη κοινωνικών πρωτοβουλιών</div>
+                  <div class="text-xs text-warm-400 t" data-en="through product distribution or education">με διάθεση προϊόντων ή εκπαιδεύσεων</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="bg-warm-900 rounded-2xl p-7 text-white">
+          <div class="inline-flex items-center gap-2 bg-honey-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6 t" data-en="How It Works">Πώς Λειτουργεί</div>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-full bg-honey-500 text-white font-black text-base flex items-center justify-center flex-shrink-0 shadow-wm">1</div>
+              <div>
+                <div class="text-sm font-bold text-white mb-0.5 t" data-en="Tell us your idea">Μας περιγράφετε την ιδέα</div>
+                <div class="text-xs text-warm-400 t" data-en="your goals and your needs">τους στόχους και τις ανάγκες σας</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-full bg-honey-500 text-white font-black text-base flex items-center justify-center flex-shrink-0 shadow-wm">2</div>
+              <div>
+                <div class="text-sm font-bold text-white mb-0.5 t" data-en="We design together">Σχεδιάζουμε μαζί</div>
+                <div class="text-xs text-warm-400 t" data-en="a personalised proposal and action plan">μια προσωποποιημένη πρόταση και πλάνο δράσης</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-full bg-honey-500 text-white font-black text-base flex items-center justify-center flex-shrink-0 shadow-wm">3</div>
+              <div>
+                <div class="text-sm font-bold text-white mb-0.5 t" data-en="We implement with transparency">Υλοποιούμε με διαφάνεια</div>
+                <div class="text-xs text-warm-400 t" data-en="quality and measurable results">ποιότητα και μετρήσιμα αποτελέσματα</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-9 h-9 rounded-full bg-honey-500 text-white font-black text-base flex items-center justify-center flex-shrink-0 shadow-wm">4</div>
+              <div>
+                <div class="text-sm font-bold text-white mb-0.5 t" data-en="Together we create lasting value">Μαζί δημιουργούμε αξία</div>
+                <div class="text-xs text-warm-400 t" data-en="that leaves a positive footprint">που αφήνει θετικό αποτύπωμα</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-warm-700">
+            <a href="mailto:business@beeparent.gr" class="btn-accent flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-sm t" data-en="Start a Special Project">Ξεκινήστε ένα Special Project</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-gradient-to-r from-warm-900 via-warm-800 to-warm-900 relative overflow-hidden">
+    <div class="honeycomb-bg absolute inset-0 opacity-10 pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative">
+      <div class="text-4xl mb-4">🐝</div>
+      <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold text-white tracking-tight mb-4">
+        <span class="text-honey-300 italic">«Μαζί, δημιουργούμε αξία που μένει.»</span>
+      </h2>
+      <p class="text-warm-400 text-base mb-8 max-w-lg mx-auto t" data-en="With every partnership, we strengthen sustainability, biodiversity and the people of the Greek countryside.">Με κάθε συνεργασία, ενισχύουμε τη βιωσιμότητα, τη βιοποικιλότητα και τους ανθρώπους της ελληνικής υπαίθρου.</p>
+      <a href="mailto:business@beeparent.gr" class="btn-accent inline-flex items-center gap-2 h-12 px-8 rounded-xl text-base font-semibold shadow-wl">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="t" data-en="Contact us — business@beeparent.gr">Επικοινωνήστε — business@beeparent.gr</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-warm-950 text-warm-600 py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between gap-10 mb-10">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span style="font-size:1.15rem;color:#d4890a;font-family:'Plus Jakarta Sans',sans-serif;line-height:1"><span style="font-weight:300">bee</span><span style="font-weight:700;letter-spacing:0.12em;font-size:0.76em">PARENT</span></span>
+          </div>
+          <p class="text-sm text-warm-700 max-w-[240px] leading-relaxed t" data-en="Connecting Greeks with the ancient craft of beekeeping.">Συνδέουμε ανθρώπους με τη μεγαλύτερη παράδοση της ελληνικής φύσης: τη μελισσοκομία.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-10 text-sm">
+          <div>
+            <div class="font-semibold text-warm-400 mb-3 text-xs uppercase tracking-wider t" data-en="Platform">Πλατφόρμα</div>
+            <div class="space-y-2.5">
+              <a href="marketplace.html" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="Find a Hive">Βρες Κυψέλη</a>
+              <a href="index.html#for-beekeepers" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="For Beekeepers">Για Μελισσοκόμους</a>
+              <a href="companies.html" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="For Companies">Για Εταιρείες</a>
+            </div>
+          </div>
+          <div>
+            <div class="font-semibold text-warm-400 mb-3 text-xs uppercase tracking-wider t" data-en="Company">Εταιρεία</div>
+            <div class="space-y-2.5">
+              <a href="about.html" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="About">Σχετικά</a>
+              <a href="#" class="block text-warm-600 hover:text-warm-300 nav-link">Blog</a>
+              <a href="#" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="Sustainability">Βιωσιμότητα</a>
+            </div>
+          </div>
+          <div>
+            <div class="font-semibold text-warm-400 mb-3 text-xs uppercase tracking-wider t" data-en="Legal">Νομικά</div>
+            <div class="space-y-2.5">
+              <a href="#" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="Privacy">Απόρρητο</a>
+              <a href="#" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="Terms">Όροι Χρήσης</a>
+              <a href="#" class="block text-warm-600 hover:text-warm-300 nav-link t" data-en="Contact">Επικοινωνία</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-warm-800 pt-6 text-xs text-warm-700">
+        © 2026 Bee Parent — <span class="t" data-en="Made with love for beekeepers and honey lovers across Greece">Φτιαγμένο με αγάπη για τους μελισσοκόμους και τους λάτρεις του ελληνικού μελιού</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('hh-lang') || 'el';
+
+    function toggleLang() {
+      currentLang = currentLang === 'el' ? 'en' : 'el';
+      localStorage.setItem('hh-lang', currentLang);
+      applyLang();
+    }
+
+    function applyLang() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('.t').forEach(el => {
+        if (!el._el) el._el = el.textContent.trim();
+        el.textContent = (currentLang === 'en' && el.dataset.en) ? el.dataset.en : el._el;
+      });
+      const btn = document.getElementById('lang-btn');
+      if (btn) {
+        btn.querySelector('.lang-flag').textContent = currentLang === 'el' ? '🇬🇷' : '🇬🇧';
+        btn.querySelector('.lang-code').textContent = currentLang === 'el' ? 'ΕΛ' : 'EN';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      currentLang = localStorage.getItem('hh-lang') || 'el';
+      applyLang();
+    });
+  </script>
+</body>
+</html>
